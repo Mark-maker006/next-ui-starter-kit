@@ -46,7 +46,8 @@ const securityHeaders = [
 
 module.exports = () => {
   const isExport = process.env.NEXT_EXPORT === 'true';
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const configuredBasePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const basePath = configuredBasePath.startsWith('/') ? configuredBasePath : '';
 
   const plugins = [withBundleAnalyzer];
   return plugins.reduce((acc, next) => next(acc), {
